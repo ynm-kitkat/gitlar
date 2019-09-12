@@ -45,13 +45,13 @@
       <transition-group name="list-complete" tag="tbody">
         <!-- <tr v-for="(issue, i) in issues" :key="issue.id" :style="rowStyle(issue)"> -->
         <tr v-for="(issue, i) in issues" :key="issue.id" @dblclick="showDescription(issue)" :style="rowStyle(issue)">
-          <td class="text-center" :tabindex="i * 10 + 1">{{ issue.id }}</td>
-          <td class="text-center" :tabindex="i * 10 + 2">{{ issue.label_system_name }}</td>
-          <td class="text-center" :tabindex="i * 10 + 3">{{ issue.label_issue_type }}</td>
-          <td class="text-center" :tabindex="i * 10 + 4">{{ issue.label_issue_progress }}</td>
-          <td class="text-left"   :tabindex="i * 10 + 5">{{ issue.title }}</td>
-          <td class="text-left"   :tabindex="i * 10 + 6">{{ issue.due_date }}</td>
-          <td class="text-left"   :tabindex="i * 10 + 7">
+          <td class="text-center nowrap" :tabindex="i * 10 + 1">{{ issue.id }}</td>
+          <td class="text-center nowrap" :tabindex="i * 10 + 2">{{ issue.label_system_name }}</td>
+          <td class="text-center nowrap" :tabindex="i * 10 + 3">{{ issue.label_issue_type }}</td>
+          <td class="text-center nowrap" :tabindex="i * 10 + 4">{{ issue.label_issue_progress }}</td>
+          <td class="text-left"          :tabindex="i * 10 + 5">{{ issue.title }}</td>
+          <td class="text-left nowrap"   :tabindex="i * 10 + 6">{{ issue.due_date }}</td>
+          <td class="text-left nowrap"   :tabindex="i * 10 + 7">
             <v-avatar v-if="issue.assignee" size="20px">
               <img alt="Avatar" :src="issue.assignee.avatar_url">
             </v-avatar>
@@ -148,9 +148,12 @@ export default class Issues extends Vue {
 
 <style lang="scss" scoped>
 table td {
-  white-space: nowrap;
   transition: .3s all;
+  &.nowrap {
+    white-space: nowrap;
+  }
 }
+
 .description-dialog {
   background: #fff;
   padding: 50px;
