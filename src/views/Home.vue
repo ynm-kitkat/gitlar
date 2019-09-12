@@ -20,6 +20,7 @@
               <v-text-field
                 v-model="host"
                 label="Host"
+                hint="'http'から入力してください。 ex ) http://127.0.0.1/"
                 required
               ></v-text-field>
               <v-text-field
@@ -160,6 +161,7 @@ export default class Home extends Vue {
   private setConfig() {
     configManager().accessToken = this.token;
     configManager().host = this.host;
+    location.reload();
   }
 
   private toLocaleString(d: Date) {
