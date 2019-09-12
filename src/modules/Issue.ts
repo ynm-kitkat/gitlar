@@ -1,5 +1,7 @@
 import Milestone from './Milestone';
 import User from './User';
+import TimeStats from './TimeStats';
+import { Label, system, type, progress, isSystem, isType, isProgress } from './Labels';
 
 export default interface Issue {
   id: number;
@@ -9,9 +11,15 @@ export default interface Issue {
   description: string;
   state: 'opened' | 'closed';
   iid: number;
-  assignees: User[];
   assignee: User;
-  labels: string[];
+  labels: Label[];
+
+  label_system_name: system | undefined;
+  label_issue_type: type | undefined;
+  label_issue_progress: progress | undefined;
+  critical: boolean;
+  high_priority: boolean;
+
   upvotes: number;
   downvotes: number;
   merge_requests_count: number;
@@ -23,24 +31,20 @@ export default interface Issue {
   user_notes_count: 1;
   due_date: string;
   web_url: string;
-  time_stats: {
-     time_estimate: number,
-     total_time_spent: number,
-     human_time_estimate: number | null,
-     human_total_time_spent: number | null,
-  };
+  time_stats: TimeStats;
   has_tasks: boolean;
   task_status: string;
   confidential: boolean;
   discussion_locked: boolean;
-  _links: {
-     self: string,
-     notes: string,
-     award_emoji: string,
-     project: string,
-  };
   task_completion_status: {
-     count: number,
-     completed_count: number,
+    count: number,
+    completed_count: number,
   };
 }
+
+export const makeIssue = (issue: Issue) => {
+  issue.label_system_name = issue.labels.find(label => isSystem(label)) as (system | undefined);
+  issue.label_issue_type = issue.labels.find(label => isType(label)) as (type | undefined);
+  issue.label_issue_progress = issue.labels.find(label => isProgress(label)) as (progress | undefined);
+  return issue;
+};
