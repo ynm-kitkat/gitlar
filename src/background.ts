@@ -32,7 +32,6 @@ function createWindow() {
       nodeIntegration: true,
     },
   });
-  win.setMenu(null);
 
   const writeBoundsConfig = () => {
     config.bounds = win && win.getBounds() || { width: 800, height: 600, x: 0, y: 0 };
@@ -44,6 +43,7 @@ function createWindow() {
       win.webContents.openDevTools();
     }
   } else {
+    win.setMenu(null);
     createProtocol('app');
     win.loadURL('app://./index.html');
   }

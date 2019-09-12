@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="about" @keyup.n="createNewIssue" ref="issueList">
     <v-dialog
       v-model="descriptionDialogVisible"
       width="60%"
@@ -91,6 +91,10 @@ export default class Issues extends Vue {
     this.getIssues();
   }
 
+  private mounted() {
+    this.$nextTick(() => (this.$refs.issueList as HTMLElement).focus());
+  }
+
   private async getIssues() {
     for (let i = 1; true; i++) {
       const url = `${this.host}/api/v4/projects/`
@@ -134,6 +138,10 @@ export default class Issues extends Vue {
       const {shell} = require('electron');
       shell.openExternal(this.selectedIssue.issue.web_url);
     }
+  }
+
+  private createNewIssue() {
+    console.log('aa')
   }
 }
 </script>

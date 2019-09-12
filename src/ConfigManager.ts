@@ -21,9 +21,9 @@ class ConfigManager {
     defaults: {
       bounds: defaultBounds,
       protocol: 'http' as 'http' | 'https',
-      host: 'http://172.16.237.69',
-      subhost: 'http://172.31.2.183',
-      accessToken: 'oX_zMcjxRvLembhSaEUE',
+      host: '',
+      subhost: '',
+      accessToken: '',
       projectId: 10,
       todos: [] as Todo[],
     },
